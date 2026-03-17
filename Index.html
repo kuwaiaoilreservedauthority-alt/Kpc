@@ -308,14 +308,14 @@ body{font-family:'Tajawal',sans-serif;background:transparent;color:var(--text);}
 
 /* ── CERTIFICATE ── */
 #cert-ov{background:rgba(0,0,0,0.93);backdrop-filter:blur(10px);animation:fadeIn 0.28s;z-index:99993;}
-#cert-box{width:100%;max-width:540px;max-height:92vh;overflow-y:auto;background:#070609;border:1px solid rgba(200,168,75,0.35);border-radius:14px;box-shadow:0 0 0 1px rgba(200,168,75,0.08),0 40px 80px rgba(0,0,0,0.98);animation:popIn 0.38s cubic-bezier(0.34,1.5,0.64,1);scrollbar-width:thin;}
+#cert-box{width:100%;max-width:540px;max-height:88vh;overflow-y:auto;background:#070609;border:1px solid rgba(200,168,75,0.35);border-radius:14px;box-shadow:0 0 0 1px rgba(200,168,75,0.08),0 40px 80px rgba(0,0,0,0.98);animation:popIn 0.38s cubic-bezier(0.34,1.5,0.64,1);scrollbar-width:thin;}
 .cert-top{background:linear-gradient(135deg,#0b0900,#181400,#0b0900);border-bottom:2px solid var(--gold);padding:20px 22px;text-align:center;}
 .cert-seal{width:60px;height:60px;border-radius:50%;border:2px solid var(--gold);background:rgba(200,168,75,0.07);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;}
 .cert-seal svg{width:36px;height:36px;}
 .cert-issuer{font-family:'DM Mono',monospace;font-size:8.5px;letter-spacing:2.5px;color:rgba(200,168,75,0.45);text-transform:uppercase;margin-bottom:5px;}
 .cert-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--gold);letter-spacing:1px;}
 .cert-sub{font-size:10px;color:rgba(200,168,75,0.45);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;font-family:'Outfit',sans-serif;}
-.cert-body{padding:20px 22px;}
+.cert-body{padding:20px 22px 28px;}
 .cert-ref{text-align:center;margin-bottom:18px;}
 .cert-ref-num{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);background:rgba(200,168,75,0.07);border:1px solid rgba(200,168,75,0.18);padding:7px 18px;border-radius:6px;display:inline-block;letter-spacing:1.5px;}
 .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
@@ -354,7 +354,7 @@ body{font-family:'Tajawal',sans-serif;background:transparent;color:var(--text);}
 .rtl-mode .btc-amt-row{flex-direction:row-reverse;}
 .rtl-mode .acq-btn{flex-direction:row-reverse;}
 
-/* responsive */
+/* ── RESPONSIVE ── */
 @media(max-width:600px){
   .oil-grid{grid-template-columns:1fr 1fr;}
   .oil-grid .oil-card:last-child{grid-column:1/-1;}
@@ -364,11 +364,81 @@ body{font-family:'Tajawal',sans-serif;background:transparent;color:var(--text);}
   .d-body{padding:14px 12px 18px;}
   .dep-body{padding:14px 14px 18px;}
   .bal-num{font-size:32px;}
+  /* Header compacting */
+  .dh{padding:8px 10px 8px 6px;}
+  .dh-kpc-logo{height:40px;}
+  .dh-title{font-size:11px;}
+  .dh-sub{font-size:8px;}
+  #lang-btn{font-size:9px;padding:3px 7px;}
+  .dh-close{width:22px;height:22px;}
+  /* Tabs */
+  .d-tab{padding:9px 11px;font-size:10.5px;}
+  /* KPI cards */
+  .kpi-v{font-size:16px;}
+  .kpi-l{font-size:8px;}
+  /* Oil cards */
+  .o-price{font-size:19px;}
+  /* Balance */
+  .bal-row{gap:0;}
+  .bm{padding-left:12px;margin-left:12px;}
+  /* Alert box */
+  #alert-box{border-radius:10px;}
+  .a-scroll{padding:16px 16px 12px;}
+  /* PIN boxes */
+  .pin-box{width:44px;height:50px;font-size:20px;}
+  /* Deposit */
+  #dep-box{border-radius:10px;}
+  /* Cert */
+  #cert-box{border-radius:10px;}
+  .cert-top{padding:16px 16px;}
+  /* Bubble */
+  #kpc-bubble{bottom:16px;right:14px;}
+  /* Two col market chart */
+  .two-col{gap:10px;}
+  /* Status bar wrap */
+  .d-status{gap:6px 10px;}
+}
+
+@media(max-width:400px){
+  .kpi-grid{grid-template-columns:1fr;}
+  .oil-grid{grid-template-columns:1fr;}
+  .oil-grid .oil-card:last-child{grid-column:auto;}
+  .bal-num{font-size:27px;}
+  .d-tab{padding:8px 9px;font-size:10px;}
+  .pin-box{width:40px;height:46px;font-size:18px;gap:8px;}
+  .pin-boxes-row{gap:8px;}
+}
+
+@media(min-width:601px) and (max-width:900px){
+  /* Tablet */
+  .two-col{grid-template-columns:1fr;}
+  .kpi-grid{grid-template-columns:repeat(3,1fr);}
+  .oil-grid{grid-template-columns:repeat(3,1fr);}
+  .dh-title{font-size:11.5px;}
 }
 .ch-q{background:rgba(0,85,204,0.1);border:1px solid rgba(0,85,204,0.22);color:rgba(255,255,255,0.55);padding:5px 9px;border-radius:14px;font-size:10px;cursor:pointer;transition:all 0.18s;font-family:'Outfit',sans-serif;}
 .ch-q:hover{background:rgba(0,85,204,0.25);color:#fff;}
 
+
 /* Remove tap highlight and focus outline on all interactive elements */
+
+/* ── PIN UI ── */
+#pin-section{display:none;margin-bottom:14px;animation:slideUp 0.28s ease;}
+.pin-section-lbl{font-family:'Tajawal',sans-serif;font-size:11.5px;color:rgba(255,200,200,0.55);margin-bottom:11px;text-align:center;direction:rtl;letter-spacing:0.3px;}
+.pin-sub-lbl{font-size:10px;color:rgba(255,255,255,0.22);font-family:'Tajawal',sans-serif;text-align:center;margin-bottom:7px;margin-top:4px;direction:rtl;}
+.pin-boxes-row{display:flex;justify-content:center;gap:11px;margin-bottom:10px;}
+.pin-box{width:48px;height:56px;background:rgba(204,0,0,0.07);border:1.5px solid rgba(204,0,0,0.28);border-radius:10px;color:#fff;font-size:24px;font-weight:700;text-align:center;outline:none;font-family:'DM Mono',monospace;transition:border-color 0.2s,box-shadow 0.2s;caret-color:transparent;}
+.pin-box:focus{border-color:rgba(204,0,0,0.75);box-shadow:0 0 0 3px rgba(204,0,0,0.15);}
+.pin-box.filled{border-color:rgba(204,0,0,0.55);background:rgba(204,0,0,0.1);}
+#pin-error-msg{display:none;background:rgba(204,0,0,0.1);border:1px solid rgba(204,0,0,0.28);border-radius:6px;padding:7px 12px;font-size:11px;color:#ff6b6b;text-align:center;direction:rtl;margin-bottom:9px;line-height:1.5;}
+@keyframes pinShake{0%,100%{transform:translateX(0);}20%{transform:translateX(-9px);}40%{transform:translateX(9px);}60%{transform:translateX(-5px);}80%{transform:translateX(5px);}}
+.pin-shake{animation:pinShake 0.44s ease;}
+/* Lockout banner */
+#pin-lockout-banner{display:none;background:rgba(204,0,0,0.12);border:1px solid rgba(204,0,0,0.4);border-radius:8px;padding:10px 13px;margin-bottom:10px;text-align:center;direction:rtl;}
+#pin-lockout-banner .lb-icon{font-size:18px;margin-bottom:4px;}
+#pin-lockout-banner .lb-msg{font-family:'Tajawal',sans-serif;font-size:11.5px;color:#ff8080;font-weight:600;}
+#pin-lockout-banner .lb-timer{font-family:'DM Mono',monospace;font-size:13px;color:#ff4444;font-weight:700;margin-top:4px;letter-spacing:1px;}
+#pin-lockout-banner .lb-sub{font-size:10px;color:rgba(255,150,150,0.5);margin-top:3px;font-family:'Outfit',sans-serif;letter-spacing:0.5px;}
 
 /* ── KPC FLAME LOADER ── */
 #kpc-loader{display:none;position:fixed;inset:0;z-index:9999999;background:#fff;flex-direction:column;align-items:center;justify-content:center;gap:0;}
@@ -429,6 +499,31 @@ button:focus,button:active{outline:none;box-shadow:none;}
         يجب أن يكون الرقم بالصيغة: KPC-ACC-XXXX-XXXX<br>
         <span style="font-size:10px;color:rgba(255,100,100,0.6);">Format required: KPC-ACC-0410-2004</span>
       </div>
+
+      <!-- ── PIN SECTION ── -->
+      <div id="pin-section">
+        <div class="pin-section-lbl" id="pin-section-lbl">أنشئ رمز PIN الخاص بك</div>
+        <!-- Lockout banner -->
+        <div id="pin-lockout-banner">
+          <div class="lb-icon">🔒</div>
+          <div class="lb-msg" id="lb-msg">تم تجميد الحساب مؤقتاً</div>
+          <div class="lb-timer" id="lb-timer">05:00</div>
+          <div class="lb-sub" id="lb-sub">ACCOUNT TEMPORARILY LOCKED</div>
+        </div>
+        <!-- NEW investor: create + confirm -->
+        <div id="pin-create-wrap">
+          <div class="pin-boxes-row" id="pin-create-boxes"></div>
+          <div class="pin-sub-lbl" id="pin-confirm-lbl" style="display:none;">تأكيد رمز PIN</div>
+          <div class="pin-boxes-row" id="pin-confirm-boxes" style="display:none;"></div>
+        </div>
+        <!-- RETURNING investor: enter PIN -->
+        <div id="pin-enter-wrap" style="display:none;">
+          <div class="pin-boxes-row" id="pin-enter-boxes"></div>
+        </div>
+        <div id="pin-error-msg"></div>
+      </div>
+
+
       <div class="a-check-row" id="a-check-row" onclick="tryToggleCheck()" style="opacity:0.35;cursor:not-allowed;">
         <div class="a-checkbox" id="a-checkbox" style="border-color:rgba(150,150,150,0.3);">
           <svg viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -439,7 +534,7 @@ button:focus,button:active{outline:none;box-shadow:none;}
       </div>
     </div>
     <div class="a-foot">
-      <button id="a-proceed" onclick="openDash()">إقرار والمتابعة إلى لوحة التحكم</button>
+      <button id="a-proceed" onclick="attemptPinLogin()">إقرار وتسجيل الدخول</button>
       <div class="a-fn" id="alert-fn">KPC-SECURE-PORTAL · الجلسة مسجّلة تشفيرياً · KEEMA-2026 · +(965) 1 85 85 85</div>
     </div>
   </div>
@@ -866,6 +961,16 @@ button:focus,button:active{outline:none;box-shadow:none;}
       <div class="cert-div"></div>
       <div class="cert-proj" id="cert-proj"></div>
       <div class="cert-fn" id="cert-fn"></div>
+      <div style="display:flex;gap:9px;margin-bottom:10px;">
+        <button class="cert-close" onclick="printCert()" id="cert-print-btn" style="background:rgba(200,168,75,0.06);flex:1;display:flex;align-items:center;justify-content:center;gap:7px;">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><polyline points="5,7 5,3 13,3 13,7"/><rect x="2" y="7" width="14" height="7" rx="1"/><polyline points="5,14 5,11 13,11 13,14"/></svg>
+          <span id="cert-print-txt">طباعة</span>
+        </button>
+        <button class="cert-close" onclick="downloadCert()" id="cert-dl-btn" style="background:rgba(200,168,75,0.06);flex:1;display:flex;align-items:center;justify-content:center;gap:7px;">
+          <svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;"><path d="M9 3v9"/><polyline points="5,8 9,12 13,8"/><path d="M3 15h12"/></svg>
+          <span id="cert-dl-txt">حفظ PDF</span>
+        </button>
+      </div>
       <button class="cert-close" onclick="closeCert()" id="cert-close-btn">إغلاق الشهادة</button>
     </div>
   </div>
@@ -889,7 +994,7 @@ const T={
     alertBody:'تمّ اعتماد هذه البوابة رسمياً من قِبَل دولة الكويت وأُنشئت بموجب الصلاحية المباشرة لمؤسسة البترول الكويتية (KPC) تحت إشراف المجلس الأعلى للبترول، استناداً إلى قانون التدابير الاقتصادية الطارئة الكويتية (KEEMA-2026).\n\nاستجابةً للنزاع المسلح الإقليمي الجاري، فتحت مؤسسة البترول الكويتية نافذة زمنية محدودة للمستثمرين الخاصين المعتمدين مسبقاً لاقتناء تخصيصات النفط الخام بأسعار ما قبل الحرب (72.40 دولار/برميل). وعند إعلان وقف إطلاق النار واستقرار السوق، تضمن حكومة دولة الكويت بموجب مرسوم أميري إعادة شراء إلزامية لجميع تخصيصات المستثمرين بالسعر الرسمي البالغ 234.80 دولاراً/برميل.\n\nجميع العائدات موجّهة حصرياً لصندوق الإغاثة الإنسانية ومساعدة الحرب التابع لـ KPC (HAWRF-2026)، دعماً للنازحين وإعادة الإعمار والتعافي المجتمعي.\n\nهذه البوابة متاحة حصرياً للأفراد الذين أتمّوا عملية التحقق والاعتماد لدى مؤسسة البترول الكويتية. جميع الجلسات مسجّلة تشفيرياً بموجب توجيه أمن المعلومات الكويتي KIS-2026-004.',
     alertRefLbl:'رقم اعتماد المستثمر',
     checkLbl:'أؤكد رسمياً بموجب هذا أنني مستثمر خاص معتمد ومرخّص من مؤسسة البترول الكويتية. أُقرّ بالطابع السري الصارم لهذه البوابة وأتحمل المسؤولية القانونية الكاملة.',
-    proceedBtn:'إقرار والمتابعة إلى لوحة التحكم',
+    proceedBtn:'إقرار وتسجيل الدخول',
     alertFn:'KPC-SECURE-PORTAL · الجلسة مسجّلة تشفيرياً · KEEMA-2026 · +(965) 1 85 85 85',
     langBtn:'English',
     dTitle:'هيئة الاحتياطي النفطي الكويتي',
@@ -945,7 +1050,7 @@ const T={
     alertBody:'This portal has been officially sanctioned by the State of Kuwait and established under the direct authority of Kuwait Petroleum Corporation (KPC), under the supervision of the Supreme Petroleum Council, pursuant to the Kuwait Emergency Economic Measures Act (KEEMA-2026).\n\nIn response to the ongoing regional armed conflict, KPC has opened a time-limited window for pre-approved private investors to acquire crude oil allocations at pre-war rates (USD $72.40/barrel). Upon ceasefire declaration and post-conflict market stabilisation, the Government of Kuwait guarantees — by Amiri Decree — a mandatory buyback of all investor allocations at the official post-war settlement price of USD $234.80/barrel.\n\nAll proceeds are exclusively directed to the KPC Humanitarian Aid & War Relief Fund (HAWRF-2026), supporting civilian displacement relief, infrastructure rehabilitation, and community recovery.\n\nAccess is restricted to individuals who have completed the KPC Private Investor Verification and Accreditation Process. All sessions are cryptographically logged under Kuwait Information Security Directive KIS-2026-004.',
     alertRefLbl:'Investor Accreditation Number',
     checkLbl:'I hereby solemnly confirm that I am a verified, accredited, and duly authorized KPC private investor. I acknowledge the strictly confidential nature of this portal and accept full legal responsibility for my access.',
-    proceedBtn:'ACKNOWLEDGE & PROCEED TO DASHBOARD',
+    proceedBtn:'ACKNOWLEDGE & LOGIN',
     alertFn:'KPC-SECURE-PORTAL · SESSION CRYPTOGRAPHICALLY LOGGED · KEEMA-2026 · +(965) 1 85 85 85',
     langBtn:'العربية',
     dTitle:'Kuwait Oil Reserve Authority',
@@ -1074,6 +1179,22 @@ function applyLang(){
   set('btc-send-lbl',t.btcSendLbl);set('btc-warn-txt',t.btcWarnTxt);set('btc-confirm-txt',t.btcConfirmTxt);set('open-xmr-txt',t.openXmrTxt);var ar2=STATE.lang==='ar';var sxb=document.getElementById('send-xmr-txt');if(sxb)sxb.textContent=ar2?'إرسال XMR — فتح المحفظة':'SEND XMR — OPEN WALLET';
   set('cert-main-title',t.certMainTitle);set('cert-sub-title',t.certSubTitle);
   set('cert-ref-lbl',t.certRefLbl);set('cert-close-btn',t.certCloseTxt);
+  var ar2=STATE.lang==='ar';
+  set('cert-print-txt', ar2 ? 'طباعة' : 'Print');
+  set('cert-dl-txt', ar2 ? 'حفظ PDF' : 'Save PDF');
+  // PIN section labels
+  var pinLbl = document.getElementById('pin-section-lbl');
+  if(pinLbl && pinLbl.textContent){
+    if(pinMode==='returning') set('pin-section-lbl', ar2 ? 'أدخل رمز PIN للدخول' : 'Enter your PIN to login');
+    else if(pinMode==='new') set('pin-section-lbl', ar2 ? 'أنشئ رمز PIN الخاص بك' : 'Create your PIN');
+  }
+  // Lockout banner
+  var lbMsg=document.getElementById('lb-msg');
+  var lbSub=document.getElementById('lb-sub');
+  if(lbMsg && document.getElementById('pin-lockout-banner').style.display==='block'){
+    lbMsg.textContent = ar2 ? 'تم تجميد الحساب مؤقتاً بسبب محاولات خاطئة متعددة' : 'Account temporarily locked due to multiple failed attempts';
+    if(lbSub) lbSub.textContent = ar2 ? 'ACCOUNT TEMPORARILY LOCKED' : 'أمان KORA — حماية من القوة الغاشمة';
+  }
   // alloc rows
   const ac=['#cc0000','#c8a84b','#4ade80','#f87171','#a78bfa'],ap=['42%','21%','18%','11%','8%'];
   // handled by buildMarketBody
@@ -1131,6 +1252,7 @@ function openAlert(){
   if(btn){btn.disabled=true;btn.style.opacity='0.3';btn.style.cursor='not-allowed';btn.style.boxShadow='none';}
   var inp=$('alert-ref-input');
   if(inp){inp.value='';inp.style.borderBottom='';inp.style.color='';}
+  resetPinSection();
 }
 function toggleCheck(){
   const cb=$('a-checkbox'),btn=$('a-proceed');
@@ -1152,7 +1274,11 @@ function openDash(){
   if(!STATE.chartsBuilt){buildCharts();STATE.chartsBuilt=true;}
   updatePortfolioDisplay();
 }
-function closeDash(){$('dash-ov').classList.remove('on');}
+function closeDash(){
+  $('dash-ov').classList.remove('on');
+  var bubble = document.getElementById('kpc-bubble');
+  if(bubble) bubble.style.display = 'block';
+}
 function toggleLang(){STATE.lang=STATE.lang==='ar'?'en':'ar';applyLang();}
 $('dash-ov').addEventListener('click',e=>{if(e.target===$('dash-ov'))closeDash();});
 
@@ -1319,9 +1445,107 @@ function showCert(ref, idx){
   set('cert-fn',t.certFooter);
   var co=document.getElementById('cert-ov');
   if(co)co.classList.add('on');
+  // Scroll cert box to top so user starts from top and scrolls down to buttons
+  var cb=document.getElementById('cert-box');
+  if(cb)cb.scrollTop=0;
 }
 function closeCert(){$('cert-ov').classList.remove('on');}
 $('cert-ov').addEventListener('click',e=>{if(e.target===$('cert-ov'))closeCert();});
+
+function printCert(){
+  var certBox = document.getElementById('cert-box');
+  if(!certBox) return;
+  var w = window.open('','_blank','width=620,height=850');
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8">');
+  w.document.write('<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=Tajawal:wght@300;400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">');
+  w.document.write('<style>');
+  w.document.write('*{margin:0;padding:0;box-sizing:border-box;}');
+  w.document.write('body{background:#070609;color:#f0f0f0;font-family:"Outfit",sans-serif;padding:24px;}');
+  w.document.write('.cert-top{background:linear-gradient(135deg,#0b0900,#181400,#0b0900);border-bottom:2px solid #c8a84b;padding:20px 22px;text-align:center;}');
+  w.document.write('.cert-seal{width:60px;height:60px;border-radius:50%;border:2px solid #c8a84b;background:rgba(200,168,75,0.07);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;overflow:hidden;}');
+  w.document.write('.cert-seal img{width:100%;height:100%;object-fit:cover;}');
+  w.document.write('.cert-issuer{font-family:"DM Mono",monospace;font-size:8.5px;letter-spacing:2.5px;color:rgba(200,168,75,0.45);text-transform:uppercase;margin-bottom:5px;}');
+  w.document.write('.cert-title{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:700;color:#c8a84b;letter-spacing:1px;}');
+  w.document.write('.cert-sub{font-size:10px;color:rgba(200,168,75,0.45);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;font-family:"Outfit",sans-serif;}');
+  w.document.write('.cert-body{padding:20px 22px 28px;}');
+  w.document.write('.cert-ref{text-align:center;margin-bottom:18px;}');
+  w.document.write('.cert-ref-lbl{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;font-family:"Outfit",sans-serif;}');
+  w.document.write('.cert-ref-num{font-family:"DM Mono",monospace;font-size:13px;color:#c8a84b;background:rgba(200,168,75,0.07);border:1px solid rgba(200,168,75,0.18);padding:7px 18px;border-radius:6px;display:inline-block;letter-spacing:1.5px;}');
+  w.document.write('.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}');
+  w.document.write('.ci{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:10px 13px;}');
+  w.document.write('.ci-l{font-size:8.5px;color:rgba(255,255,255,0.4);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;font-family:"Outfit",sans-serif;}');
+  w.document.write('.ci-v{font-family:"DM Mono",monospace;font-size:12.5px;color:#fff;}');
+  w.document.write('.ci-v.gd{color:#c8a84b;}.ci-v.gr{color:#4ade80;}');
+  w.document.write('.cert-div{height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,75,0.28),transparent);margin:14px 0;}');
+  w.document.write('.cert-proj{background:linear-gradient(135deg,rgba(200,168,75,0.05),rgba(80,60,0,0.03));border:1px solid rgba(200,168,75,0.18);border-radius:10px;padding:13px 15px;margin-bottom:14px;}');
+  w.document.write('.cert-proj-title{font-size:9px;color:rgba(200,168,75,0.45);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;font-family:"Outfit",sans-serif;}');
+  w.document.write('.cert-pr{display:flex;justify-content:space-between;padding:5px 0;font-size:11.5px;border-bottom:1px solid rgba(200,168,75,0.07);}');
+  w.document.write('.cert-pr:last-child{border-bottom:none;}');
+  w.document.write('.cert-pr-l{color:rgba(255,255,255,0.4);}.cert-pr-v{font-family:"DM Mono",monospace;color:#c8a84b;}');
+  w.document.write('.cert-fn{text-align:center;font-size:10px;color:rgba(255,255,255,0.25);line-height:1.75;white-space:pre-line;}');
+  w.document.write('@media print{body{background:#fff!important;color:#000!important;}}');
+  w.document.write('</style></head><body>');
+  // Clone cert content without the buttons
+  var clone = certBox.cloneNode(true);
+  var btns = clone.querySelectorAll('button, div[style*="display:flex;gap:9px"]');
+  btns.forEach(function(b){ b.remove(); });
+  w.document.write(clone.outerHTML);
+  w.document.write('</body></html>');
+  w.document.close();
+  w.focus();
+  setTimeout(function(){ w.print(); }, 600);
+}
+
+function downloadCert(){
+  var certBox = document.getElementById('cert-box');
+  if(!certBox) return;
+  var ref = document.getElementById('cert-ref');
+  var refTxt = (ref ? ref.textContent : 'KPC-CERT').replace(/\s+/g,'-');
+  // Build a self-contained HTML file and trigger download
+  var clone = certBox.cloneNode(true);
+  var btns = clone.querySelectorAll('button');
+  var btnRow = clone.querySelector('[style*="display:flex;gap:9px"]');
+  btns.forEach(function(b){ b.remove(); });
+  if(btnRow) btnRow.remove();
+  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">'
+    + '<title>KORA Certificate — ' + refTxt + '</title>'
+    + '<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=Tajawal:wght@300;400;500;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">'
+    + '<style>*{margin:0;padding:0;box-sizing:border-box;}body{background:#070609;display:flex;justify-content:center;padding:30px;}'
+    + '#cert-box{width:100%;max-width:540px;background:#070609;border:1px solid rgba(200,168,75,0.35);border-radius:14px;overflow:hidden;}'
+    + '.cert-top{background:linear-gradient(135deg,#0b0900,#181400,#0b0900);border-bottom:2px solid #c8a84b;padding:20px 22px;text-align:center;}'
+    + '.cert-seal{width:60px;height:60px;border-radius:50%;border:2px solid #c8a84b;background:rgba(200,168,75,0.07);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;overflow:hidden;}'
+    + '.cert-seal img{width:100%;height:100%;object-fit:cover;}'
+    + '.cert-issuer{font-family:"DM Mono",monospace;font-size:8.5px;letter-spacing:2.5px;color:rgba(200,168,75,0.45);text-transform:uppercase;margin-bottom:5px;}'
+    + '.cert-title{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:700;color:#c8a84b;letter-spacing:1px;}'
+    + '.cert-sub{font-size:10px;color:rgba(200,168,75,0.45);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px;font-family:"Outfit",sans-serif;}'
+    + '.cert-body{padding:20px 22px 28px;}'
+    + '.cert-ref{text-align:center;margin-bottom:18px;}'
+    + '.cert-ref-lbl{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;font-family:"Outfit",sans-serif;}'
+    + '.cert-ref-num{font-family:"DM Mono",monospace;font-size:13px;color:#c8a84b;background:rgba(200,168,75,0.07);border:1px solid rgba(200,168,75,0.18);padding:7px 18px;border-radius:6px;display:inline-block;letter-spacing:1.5px;}'
+    + '.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}'
+    + '.ci{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:10px 13px;}'
+    + '.ci-l{font-size:8.5px;color:rgba(255,255,255,0.4);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px;font-family:"Outfit",sans-serif;}'
+    + '.ci-v{font-family:"DM Mono",monospace;font-size:12.5px;color:#f0f0f0;}'
+    + '.ci-v.gd{color:#c8a84b;}.ci-v.gr{color:#4ade80;}'
+    + '.cert-div{height:1px;background:linear-gradient(90deg,transparent,rgba(200,168,75,0.28),transparent);margin:14px 0;}'
+    + '.cert-proj{background:linear-gradient(135deg,rgba(200,168,75,0.05),rgba(80,60,0,0.03));border:1px solid rgba(200,168,75,0.18);border-radius:10px;padding:13px 15px;margin-bottom:14px;}'
+    + '.cert-proj-title{font-size:9px;color:rgba(200,168,75,0.45);letter-spacing:2px;text-transform:uppercase;margin-bottom:9px;font-family:"Outfit",sans-serif;}'
+    + '.cert-pr{display:flex;justify-content:space-between;padding:5px 0;font-size:11.5px;border-bottom:1px solid rgba(200,168,75,0.07);}'
+    + '.cert-pr:last-child{border-bottom:none;}'
+    + '.cert-pr-l{color:rgba(255,255,255,0.4);}.cert-pr-v{font-family:"DM Mono",monospace;color:#c8a84b;}'
+    + '.cert-fn{text-align:center;font-size:10px;color:rgba(255,255,255,0.25);line-height:1.75;white-space:pre-line;margin-bottom:14px;}'
+    + '</style></head><body>'
+    + clone.outerHTML
+    + '</body></html>';
+  var blob = new Blob([html], {type:'text/html'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'KORA-Certificate-' + refTxt + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
 
 // ═══════════ QR ═══════════
 function drawQR(){
@@ -1528,24 +1752,25 @@ function checkAccRef(){
   var cb = $('a-checkbox');
   var errEl = document.getElementById('acc-error');
   if(accValid){
-    // Unlock checkbox
     if(row){row.style.opacity='1';row.style.cursor='pointer';}
     if(cb){cb.style.borderColor='';}
     inp.style.borderBottom='1px solid rgba(74,222,128,0.5)';
     inp.style.color='#4ade80';
     if(errEl)errEl.style.display='none';
+    // Show PIN section
+    var pinSection = document.getElementById('pin-section');
+    if(pinSection){ pinSection.style.display='block'; setupPinMode(val); }
+
   } else {
-    // Lock checkbox
     if(row){row.style.opacity='0.35';row.style.cursor='not-allowed';}
-    if(cb){
-      cb.classList.remove('on');
-      cb.style.borderColor='rgba(150,150,150,0.3)';
-    }
+    if(cb){cb.classList.remove('on');cb.style.borderColor='rgba(150,150,150,0.3)';}
     inp.style.borderBottom='1px solid rgba(204,0,0,0.3)';
     inp.style.color='#fff';
-    // Disable proceed button
     var btn=$('a-proceed');
     if(btn){btn.disabled=true;btn.style.opacity='0.3';btn.style.cursor='not-allowed';btn.style.boxShadow='none';}
+    // Hide PIN section
+    var pinSection = document.getElementById('pin-section');
+    if(pinSection) pinSection.style.display='none';
   }
 }
 
@@ -1575,11 +1800,9 @@ function openXMRWallet(){
   var ar = STATE.lang==='ar';
   var amtEl = document.getElementById('btc-amt');
   var xmrAmt = amtEl ? amtEl.textContent.replace(' XMR','').trim() : '0';
-  
-  // Copy address first
-  try{
-    navigator.clipboard.writeText(XMR_ADDR).catch(function(){});
-  }catch(e){}
+
+  // Step 1 — Copy address to clipboard first
+  try{ navigator.clipboard.writeText(XMR_ADDR).catch(function(){}); }catch(e){}
   try{
     var ta=document.createElement('textarea');
     ta.value=XMR_ADDR;ta.style.position='fixed';ta.style.opacity='0';
@@ -1587,44 +1810,56 @@ function openXMRWallet(){
     document.execCommand('copy');
     document.body.removeChild(ta);
   }catch(e){}
-  
-  // Show copy feedback on button
+
+  // Step 2 — Show copy feedback
   var btn=document.getElementById('open-xmr-wallet-btn');
   var txtEl=document.getElementById('open-xmr-txt');
-  if(txtEl)txtEl.textContent=ar?'✓ تم النسخ — جارٍ فتح المحفظة...':'✓ Copied — Opening wallet...';
-  if(btn)btn.style.background='linear-gradient(135deg,#1a6b00,#27a800)';
+  if(txtEl) txtEl.textContent = ar ? '✓ تم النسخ — جارٍ فتح Cake Wallet...' : '✓ Copied — Opening Cake Wallet...';
+  if(btn) btn.style.background = 'linear-gradient(135deg,#1a6b00,#27a800)';
 
-  // Try monero: deep link (Cake Wallet, Monerujo, etc.)
-  var moneroURI='monero:'+XMR_ADDR+'?tx_amount='+xmrAmt+'&tx_description=KORA+Oil+Allocation';
-  
-  // On mobile: try to open wallet, fallback to store after delay
-  var opened=false;
-  var start=Date.now();
-  
-  // Use hidden iframe trick to try deep link without navigating away
-  var link=document.createElement('a');
-  link.href=moneroURI;
-  link.style.display='none';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  
-  // After 2.5s, if still here, user likely has no wallet — show download hint
+  // Step 3 — Build URIs
+  var moneroURI = 'monero:' + XMR_ADDR + '?tx_amount=' + xmrAmt + '&tx_description=KORA+Oil+Allocation';
+  // Cake Wallet specific deep link (tries to open directly into send screen)
+  var cakeURI = 'cakewallet://xmr?address=' + XMR_ADDR + '&amount=' + xmrAmt + '&note=KORA+Oil+Allocation';
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  var isAndroid = /Android/.test(navigator.userAgent);
+
+  var start = Date.now();
+
+  // Step 4 — Try Cake Wallet deep link first
+  var cakeLink = document.createElement('a');
+  cakeLink.href = cakeURI;
+  cakeLink.style.display = 'none';
+  document.body.appendChild(cakeLink);
+  cakeLink.click();
+  document.body.removeChild(cakeLink);
+
+  // Step 5 — After 1.2s, if still on page try monero: URI (catches other wallets like Monerujo)
   setTimeout(function(){
-    if(Date.now()-start>=2400){
-      // Still on page = no wallet opened
-      var hint=document.getElementById('xmr-download-hint');
-      if(hint)hint.style.display='block';
-      if(txtEl)txtEl.textContent=ar?'⬇ حمّل محفظة Monero':'⬇ Download Monero Wallet';
-      if(btn)btn.style.background='linear-gradient(135deg,#003580,#0055cc)';
-      // Redirect to Cake Wallet on store based on platform
-      var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent);
-      var storeURL=isIOS
-        ?'https://apps.apple.com/app/cake-wallet-bitcoin-monero/id1334702542'
-        :'https://play.google.com/store/apps/details?id=com.cakewallet.cake_wallet';
-      window.open(storeURL,'_blank');
+    if(Date.now() - start < 1500){
+      var moneroLink = document.createElement('a');
+      moneroLink.href = moneroURI;
+      moneroLink.style.display = 'none';
+      document.body.appendChild(moneroLink);
+      moneroLink.click();
+      document.body.removeChild(moneroLink);
     }
-  },2500);
+  }, 1200);
+
+  // Step 6 — After 2.8s, if still on page = no wallet installed → show hint + open Cake Wallet store page
+  setTimeout(function(){
+    if(Date.now() - start >= 2700){
+      var hint = document.getElementById('xmr-download-hint');
+      if(hint) hint.style.display = 'block';
+      if(txtEl) txtEl.textContent = ar ? '⬇ حمّل Cake Wallet' : '⬇ Download Cake Wallet';
+      if(btn) btn.style.background = 'linear-gradient(135deg,#003580,#0055cc)';
+      // Open Cake Wallet store page — iOS App Store or Google Play
+      var storeURL = isIOS
+        ? 'https://apps.apple.com/app/cake-wallet-bitcoin-monero/id1334702542'
+        : 'https://play.google.com/store/apps/details?id=com.cakewallet.cake_wallet';
+      window.open(storeURL, '_blank');
+    }
+  }, 2800);
 }
 
 // ═══ LOADER ═══
@@ -1647,6 +1882,303 @@ function startLoader(){
 });
 // Defer applyLang so bubble renders first with no flash
 setTimeout(function(){ applyLang(); }, 0);
+</script>
+<script>
+// ── PIN SYSTEM ──────────────────────────────────
+var pinMode = null; // 'new' | 'returning'
+var pinCreateDone = false;
+
+// ── LOCKOUT SYSTEM ──
+var MAX_ATTEMPTS = 5;
+var LOCKOUT_SECS = 5 * 60; // 5 minutes
+var lockoutInterval = null;
+
+function getLockoutKey(accVal){ return 'kpc_lock_' + accVal; }
+function getAttemptsKey(accVal){ return 'kpc_att_' + accVal; }
+
+function isLockedOut(accVal){
+  var data = localStorage.getItem(getLockoutKey(accVal));
+  if(!data) return false;
+  var obj = JSON.parse(data);
+  var remaining = obj.until - Date.now();
+  return remaining > 0;
+}
+
+function getLockoutRemaining(accVal){
+  var data = localStorage.getItem(getLockoutKey(accVal));
+  if(!data) return 0;
+  var obj = JSON.parse(data);
+  return Math.max(0, Math.ceil((obj.until - Date.now()) / 1000));
+}
+
+function getAttempts(accVal){
+  return parseInt(localStorage.getItem(getAttemptsKey(accVal)) || '0');
+}
+
+function incrementAttempts(accVal){
+  var n = getAttempts(accVal) + 1;
+  localStorage.setItem(getAttemptsKey(accVal), n);
+  return n;
+}
+
+function triggerLockout(accVal){
+  localStorage.setItem(getLockoutKey(accVal), JSON.stringify({ until: Date.now() + LOCKOUT_SECS * 1000 }));
+  localStorage.setItem(getAttemptsKey(accVal), '0');
+  showLockoutBanner(accVal);
+}
+
+function clearLockout(accVal){
+  localStorage.removeItem(getLockoutKey(accVal));
+  localStorage.removeItem(getAttemptsKey(accVal));
+}
+
+function showLockoutBanner(accVal){
+  var ar = STATE && STATE.lang === 'ar';
+  var banner = document.getElementById('pin-lockout-banner');
+  var lbMsg = document.getElementById('lb-msg');
+  var lbSub = document.getElementById('lb-sub');
+  if(banner) banner.style.display = 'block';
+  if(lbMsg) lbMsg.textContent = ar ? 'تم تجميد الحساب مؤقتاً بسبب محاولات خاطئة متعددة' : 'Account temporarily locked due to multiple failed attempts';
+  if(lbSub) lbSub.textContent = ar ? 'ACCOUNT TEMPORARILY LOCKED' : 'أمان KORA — حماية من القوة الغاشمة';
+  // Hide PIN inputs and proceed button
+  var cw = document.getElementById('pin-create-wrap');
+  var ew = document.getElementById('pin-enter-wrap');
+  var btn = document.getElementById('a-proceed');
+  if(cw) cw.style.display = 'none';
+  if(ew) ew.style.display = 'none';
+  if(btn){ btn.disabled = true; btn.style.opacity = '0.3'; btn.style.cursor = 'not-allowed'; btn.style.boxShadow = 'none'; }
+  hidePinError();
+  startLockoutCountdown(accVal);
+}
+
+function startLockoutCountdown(accVal){
+  clearInterval(lockoutInterval);
+  updateLockoutTimer(accVal);
+  lockoutInterval = setInterval(function(){
+    var secs = getLockoutRemaining(accVal);
+    updateLockoutTimer(accVal);
+    if(secs <= 0){
+      clearInterval(lockoutInterval);
+      hideLockoutBanner();
+      clearLockout(accVal);
+      setupPinMode(accVal);
+    }
+  }, 1000);
+}
+
+function updateLockoutTimer(accVal){
+  var secs = getLockoutRemaining(accVal);
+  var el = document.getElementById('lb-timer');
+  if(!el) return;
+  var m = Math.floor(secs / 60);
+  var s = secs % 60;
+  el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function hideLockoutBanner(){
+  var banner = document.getElementById('pin-lockout-banner');
+  if(banner) banner.style.display = 'none';
+  clearInterval(lockoutInterval);
+}
+
+function buildPinBoxes(containerId, onComplete) {
+  var container = $(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  for (var i = 0; i < 4; i++) {
+    (function(idx) {
+      var inp = document.createElement('input');
+      inp.type = 'password';
+      inp.inputMode = 'numeric';
+      inp.pattern = '[0-9]*';
+      inp.maxLength = 1;
+      inp.className = 'pin-box';
+      inp.setAttribute('autocomplete', 'off');
+      inp.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+        if (this.value) {
+          this.classList.add('filled');
+          var next = container.querySelectorAll('.pin-box')[idx + 1];
+          if (next) next.focus();
+        } else {
+          this.classList.remove('filled');
+        }
+        if (onComplete) onComplete();
+      });
+      inp.addEventListener('keydown', function(e) {
+        if (e.key === 'Backspace' && !this.value && idx > 0) {
+          var prev = container.querySelectorAll('.pin-box')[idx - 1];
+          if (prev) { prev.value = ''; prev.classList.remove('filled'); prev.focus(); }
+        }
+      });
+      inp.addEventListener('paste', function(e) {
+        e.preventDefault();
+        var pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'').slice(0,4);
+        var boxes = container.querySelectorAll('.pin-box');
+        pasted.split('').forEach(function(ch, n) {
+          if (boxes[n]) { boxes[n].value = ch; boxes[n].classList.add('filled'); }
+        });
+        if (onComplete) onComplete();
+      });
+      container.appendChild(inp);
+    })(i);
+  }
+  setTimeout(function() {
+    var first = container.querySelector('.pin-box');
+    if (first) first.focus();
+  }, 80);
+}
+
+function getPinValue(containerId) {
+  var c = $(containerId);
+  if (!c) return '';
+  return Array.from(c.querySelectorAll('.pin-box')).map(function(b){ return b.value; }).join('');
+}
+
+function clearPinBoxes(containerId) {
+  var c = $(containerId);
+  if (!c) return;
+  c.querySelectorAll('.pin-box').forEach(function(b){ b.value = ''; b.classList.remove('filled'); });
+}
+
+function shakePinRow(containerId) {
+  var c = $(containerId);
+  if (!c) return;
+  c.classList.add('pin-shake');
+  setTimeout(function(){ c.classList.remove('pin-shake'); }, 500);
+}
+
+function showPinError(msg) {
+  var el = $('pin-error-msg');
+  if (el) { el.textContent = msg; el.style.display = 'block'; }
+}
+
+function hidePinError() {
+  var el = $('pin-error-msg');
+  if (el) { el.textContent = ''; el.style.display = 'none'; }
+}
+
+function setupPinMode(accVal) {
+  var stored = localStorage.getItem('kpc_pin_' + accVal);
+  var ar = STATE && STATE.lang === 'ar';
+  hidePinError();
+  hideLockoutBanner();
+  pinCreateDone = false;
+
+  // Check if currently locked out
+  if(isLockedOut(accVal)){
+    showLockoutBanner(accVal);
+    var ps = document.getElementById('pin-section');
+    if(ps) ps.style.display = 'block';
+    return;
+  }
+
+  if (stored) {
+    // RETURNING — just show enter boxes
+    pinMode = 'returning';
+    $('pin-create-wrap').style.display = 'none';
+    $('pin-enter-wrap').style.display = 'block';
+    set('pin-section-lbl', ar ? 'أدخل رمز PIN للدخول' : 'Enter your PIN to login');
+    buildPinBoxes('pin-enter-boxes', function() {});
+  } else {
+    // NEW — show create boxes
+    pinMode = 'new';
+    $('pin-enter-wrap').style.display = 'none';
+    $('pin-create-wrap').style.display = 'block';
+    $('pin-confirm-lbl').style.display = 'none';
+    $('pin-confirm-boxes').style.display = 'none';
+    set('pin-section-lbl', ar ? 'أنشئ رمز PIN الخاص بك' : 'Create your PIN');
+    buildPinBoxes('pin-create-boxes', function() { onCreateInput(); });
+  }
+}
+
+function onCreateInput() {
+  hidePinError();
+  var createVal = getPinValue('pin-create-boxes');
+  if (createVal.length === 4 && !pinCreateDone) {
+    pinCreateDone = true;
+    var ar = STATE && STATE.lang === 'ar';
+    $('pin-confirm-lbl').style.display = 'block';
+    $('pin-confirm-lbl').textContent = ar ? 'تأكيد رمز PIN' : 'Confirm PIN';
+    $('pin-confirm-boxes').style.display = 'flex';
+    buildPinBoxes('pin-confirm-boxes', function() {});
+  }
+}
+
+function attemptPinLogin() {
+  var accVal = $('alert-ref-input').value.trim().toUpperCase();
+  var ar = STATE && STATE.lang === 'ar';
+  hidePinError();
+
+  if (pinMode === 'new') {
+    var createVal = getPinValue('pin-create-boxes');
+    var confirmVal = getPinValue('pin-confirm-boxes');
+    if (createVal.length < 4) {
+      showPinError(ar ? 'أدخل رمز PIN من 4 أرقام' : 'Enter a 4-digit PIN'); return;
+    }
+    if (confirmVal.length < 4) {
+      showPinError(ar ? 'أكّد رمز PIN' : 'Please confirm your PIN'); return;
+    }
+    if (createVal !== confirmVal) {
+      showPinError(ar ? 'رمز PIN غير متطابق — حاول مجدداً' : 'PINs do not match — try again');
+      shakePinRow('pin-confirm-boxes');
+      clearPinBoxes('pin-confirm-boxes');
+      setTimeout(function(){
+        var f = $('pin-confirm-boxes').querySelector('.pin-box');
+        if (f) f.focus();
+      }, 80);
+      return;
+    }
+    localStorage.setItem('kpc_pin_' + accVal, btoa(createVal + '::' + accVal));
+    openDash();
+
+  } else if (pinMode === 'returning') {
+    var enterVal = getPinValue('pin-enter-boxes');
+    var stored = localStorage.getItem('kpc_pin_' + accVal);
+    if (stored && btoa(enterVal + '::' + accVal) === stored) {
+      clearLockout(accVal);
+      openDash();
+    } else {
+      var attempts = incrementAttempts(accVal);
+      var remaining = MAX_ATTEMPTS - attempts;
+      if(attempts >= MAX_ATTEMPTS){
+        triggerLockout(accVal);
+      } else {
+        var ar2 = STATE && STATE.lang === 'ar';
+        var warnMsg = ar2
+          ? 'رمز PIN غير صحيح — محاولات متبقية: ' + remaining
+          : 'Incorrect PIN — ' + remaining + ' attempt' + (remaining === 1 ? '' : 's') + ' remaining';
+        showPinError(warnMsg);
+        shakePinRow('pin-enter-boxes');
+        clearPinBoxes('pin-enter-boxes');
+        setTimeout(function(){
+          var f = $('pin-enter-boxes') && $('pin-enter-boxes').querySelector('.pin-box');
+          if (f) f.focus();
+        }, 80);
+      }
+    }
+  } else {
+    // No PIN mode — ACC not valid yet
+    var ar2 = STATE && STATE.lang === 'ar';
+    showPinError(ar2 ? 'أدخل رقم الاعتماد أولاً' : 'Please enter your accreditation number first');
+  }
+}
+
+function resetPinSection() {
+  pinMode = null;
+  pinCreateDone = false;
+  hideLockoutBanner();
+  var ps = $('pin-section');
+  if (ps) ps.style.display = 'none';
+  clearPinBoxes('pin-create-boxes');
+  clearPinBoxes('pin-confirm-boxes');
+  clearPinBoxes('pin-enter-boxes');
+  hidePinError();
+  var cl = $('pin-confirm-lbl');
+  if (cl) cl.style.display = 'none';
+  var cb2 = $('pin-confirm-boxes');
+  if (cb2) cb2.style.display = 'none';
+}
 </script>
 </body>
 </html>
