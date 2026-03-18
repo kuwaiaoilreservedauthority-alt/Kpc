@@ -1108,11 +1108,16 @@ async function api(route, body) {
     const r = await fetch(WORKER_URL + route, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
+      body: JSON.stringify(body),
+      mode: 'cors'
     });
+    if(!r.ok){
+      var t = await r.text();
+      return { ok: false, error: 'Error ' + r.status + ': ' + t.substring(0,80) };
+    }
     return await r.json();
   } catch(e) {
-    return { ok: false, error: 'Network error. Please try again.' };
+    return { ok: false, error: 'Network: ' + e.message };
   }
 }
 
@@ -2772,78 +2777,73 @@ function onCreateInput() {
 function attemptPinLogin(){
   var ar = STATE.lang === 'ar';
   var accVal = $('alert-ref-input') ? $('alert-ref-input').value.trim().toUpperCase() : '';
-  var pin = '';
+  var pin = pinMode === 'returning' ? getPinValue('pin-enter-boxes') : getPinValue('pin-create-boxes');
 
-  // Get PIN based on mode
-  if(pinMode === 'returning'){
-    pin = getPinValue('pin-enter-boxes');
-  } else {
-    pin = getPinValue('pin-create-boxes');
-  }
-
-  if(!accVal || !pin || pin.length < 4){
+  if(!accVal || pin.length < 4){
     showPinError(ar ? 'يرجى إدخال رمز PIN كاملاً' : 'Please enter complete PIN');
     return;
   }
 
-  // Show loading
   var btn = $('a-proceed');
   var origText = btn ? btn.textContent : '';
+  function resetBtn(){ if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.textContent=origText; } }
   if(btn){ btn.disabled=true; btn.style.opacity='0.6'; btn.textContent = ar ? 'جارٍ التحقق...' : 'Verifying...'; }
 
-  // Try login first, then register if not found
-  api('/login', { acc_number: accVal, pin: pin }).then(function(res){
-    if(!res.ok && res.error && (res.error.includes('register') || res.error.includes('not found'))){
-      // New investor — need to register
-      if(pinMode === 'new'){
-        // Check confirm PIN matches
-        var confirmPin = getPinValue('pin-confirm-boxes');
-        if(confirmPin.length < 4){
-          // Show confirm box
-          var cl = $('pin-confirm-lbl');
-          if(cl) cl.style.display = 'block';
-          var cb2 = $('pin-confirm-boxes');
-          if(cb2) cb2.style.display = 'flex';
-          if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.textContent=origText; }
-          showPinError(ar ? 'أكّد رمز PIN الخاص بك' : 'Please confirm your PIN');
+  if(pinMode === 'returning'){
+    // Existing investor — just login
+    api('/login', { acc_number: accVal, pin: pin }).then(function(res){
+      if(!res.ok){ showPinError(res.error || (ar?'رمز PIN غير صحيح':'Incorrect PIN')); recordFailedAttempt(accVal); resetBtn(); return; }
+      localStorage.setItem('kpc_pin_'+accVal, '1');
+      onLoginSuccess(res, accVal);
+    }).catch(function(){ onOfflineLogin(accVal); resetBtn(); });
+
+  } else {
+    // New investor — check if confirm PIN shown
+    var confirmPin = getPinValue('pin-confirm-boxes');
+    var confirmWrap = $('pin-confirm-boxes');
+    var confirmVisible = confirmWrap && confirmWrap.style.display !== 'none';
+
+    if(!confirmVisible){
+      // First step — show confirm PIN boxes
+      var cl = $('pin-confirm-lbl');
+      if(cl) cl.style.display = 'block';
+      if(confirmWrap) confirmWrap.style.display = 'flex';
+      resetBtn();
+      showPinError(ar ? 'أعد إدخال رمز PIN للتأكيد' : 'Re-enter your PIN to confirm');
+      return;
+    }
+
+    // Confirm step — check PINs match
+    if(pin !== confirmPin){
+      showPinError(ar ? 'رمز PIN غير متطابق — حاول مجدداً' : 'PINs do not match — try again');
+      shakePinRow('pin-confirm-boxes');
+      clearPinBoxes('pin-confirm-boxes');
+      resetBtn();
+      return;
+    }
+
+    // Register with Worker
+    api('/register', { acc_number: accVal, pin: pin }).then(function(res){
+      if(!res.ok){
+        // Account exists — switch to login mode
+        if(res.error && res.error.includes('already')){
+          pinMode = 'returning';
+          if(confirmWrap) confirmWrap.style.display = 'none';
+          if(cl) cl.style.display = 'none';
+          $('pin-create-wrap').style.display = 'none';
+          $('pin-enter-wrap').style.display = 'flex';
+          set('pin-section-lbl', ar ? 'الحساب موجود — أدخل رمز PIN' : 'Account exists — enter your PIN');
+          resetBtn();
           return;
         }
-        if(pin !== confirmPin){
-          showPinError(ar ? 'رمز PIN غير متطابق' : 'PINs do not match');
-          shakePinRow('pin-confirm-boxes');
-          if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.textContent=origText; }
-          return;
-        }
-        // Register
-        api('/register', { acc_number: accVal, pin: pin }).then(function(regRes){
-          if(!regRes.ok){
-            showPinError(regRes.error || (ar ? 'حدث خطأ' : 'Error occurred'));
-            if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.textContent=origText; }
-            return;
-          }
-          onLoginSuccess(regRes, accVal);
-        });
-      } else {
-        showPinError(ar ? 'الحساب غير موجود' : 'Account not found. Check your accreditation number.');
-        if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.textContent=origText; }
+        showPinError(res.error || (ar?'حدث خطأ':'Error occurred'));
+        resetBtn();
+        return;
       }
-      return;
-    }
-
-    if(!res.ok){
-      // Handle rate limit or wrong PIN
-      showPinError(res.error || (ar ? 'رمز PIN غير صحيح' : 'Incorrect PIN'));
-      recordFailedAttempt(accVal);
-      if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.textContent=origText; }
-      return;
-    }
-
-    onLoginSuccess(res, accVal);
-  }).catch(function(){
-    // Offline fallback — allow login without backend
-    onOfflineLogin(accVal);
-    if(btn){ btn.disabled=false; btn.style.opacity='1'; btn.textContent=origText; }
-  });
+      localStorage.setItem('kpc_pin_'+accVal, '1');
+      onLoginSuccess(res, accVal);
+    }).catch(function(){ onOfflineLogin(accVal); resetBtn(); });
+  }
 }
 
 function onLoginSuccess(res, accVal){
