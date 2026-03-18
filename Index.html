@@ -1111,11 +1111,13 @@ async function api(route, body) {
       body: JSON.stringify(body),
       mode: 'cors'
     });
-    if(!r.ok){
-      var t = await r.text();
-      return { ok: false, error: 'Error ' + r.status + ': ' + t.substring(0,80) };
+    const responseText = await r.text();
+    try {
+      const parsed = JSON.parse(responseText);
+      return parsed; // Worker always returns {ok, error} or {ok, ...data}
+    } catch(e) {
+      return { ok: false, error: 'Error ' + r.status + ': ' + responseText.substring(0,80) };
     }
-    return await r.json();
   } catch(e) {
     return { ok: false, error: 'Network: ' + e.message };
   }
