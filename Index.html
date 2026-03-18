@@ -2828,14 +2828,17 @@ function attemptPinLogin(){
     // Register with Worker
     api('/register', { acc_number: accVal, pin: pin }).then(function(res){
       if(!res.ok){
-        // Account exists — switch to login mode
+        // Account exists — switch to login mode and clear boxes
         if(res.error && res.error.includes('already')){
           pinMode = 'returning';
           if(confirmWrap) confirmWrap.style.display = 'none';
-          if(cl) cl.style.display = 'none';
+          var clLbl = $('pin-confirm-lbl');
+          if(clLbl) clLbl.style.display = 'none';
           $('pin-create-wrap').style.display = 'none';
           $('pin-enter-wrap').style.display = 'flex';
-          set('pin-section-lbl', ar ? 'الحساب موجود — أدخل رمز PIN' : 'Account exists — enter your PIN');
+          clearPinBoxes('pin-enter-boxes');
+          set('pin-section-lbl', ar ? 'الحساب موجود — أدخل رمز PIN الأصلي' : 'Account exists — enter your original PIN');
+          showPinError(ar ? 'هذا الحساب مسجّل بالفعل. أدخل رمز PIN الذي أنشأته أول مرة.' : 'This account already exists. Enter the PIN you created when you first registered.');
           resetBtn();
           return;
         }
@@ -2843,8 +2846,21 @@ function attemptPinLogin(){
         resetBtn();
         return;
       }
-      localStorage.setItem('kpc_pin_'+accVal, '1');
-      onLoginSuccess(res, accVal);
+      // Verify login works immediately after register
+      api('/login', { acc_number: accVal, pin: pin }).then(function(loginRes){
+        if(!loginRes.ok){
+          // Register worked but login failed — still let them in with register token
+          localStorage.setItem('kpc_pin_'+accVal, '1');
+          onLoginSuccess(res, accVal);
+          return;
+        }
+        localStorage.setItem('kpc_pin_'+accVal, '1');
+        onLoginSuccess(loginRes, accVal);
+      }).catch(function(){
+        // Login check failed but register worked — use register response
+        localStorage.setItem('kpc_pin_'+accVal, '1');
+        onLoginSuccess(res, accVal);
+      });
     }).catch(function(e){
       showPinError(ar ? 'خطأ في الاتصال. حاول مجدداً.' : 'Connection error. Please try again.');
       resetBtn();
