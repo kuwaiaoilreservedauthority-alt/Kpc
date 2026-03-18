@@ -2795,7 +2795,10 @@ function attemptPinLogin(){
       if(!res.ok){ showPinError(res.error || (ar?'رمز PIN غير صحيح':'Incorrect PIN')); recordFailedAttempt(accVal); resetBtn(); return; }
       localStorage.setItem('kpc_pin_'+accVal, '1');
       onLoginSuccess(res, accVal);
-    }).catch(function(){ onOfflineLogin(accVal); resetBtn(); });
+    }).catch(function(e){
+      showPinError(ar ? 'خطأ في الاتصال. حاول مجدداً.' : 'Connection error. Please try again.');
+      resetBtn();
+    });
 
   } else {
     // New investor — check if confirm PIN shown
@@ -2842,7 +2845,10 @@ function attemptPinLogin(){
       }
       localStorage.setItem('kpc_pin_'+accVal, '1');
       onLoginSuccess(res, accVal);
-    }).catch(function(){ onOfflineLogin(accVal); resetBtn(); });
+    }).catch(function(e){
+      showPinError(ar ? 'خطأ في الاتصال. حاول مجدداً.' : 'Connection error. Please try again.');
+      resetBtn();
+    });
   }
 }
 
@@ -2894,7 +2900,9 @@ function onLoginSuccess(res, accVal){
 }
 
 function onOfflineLogin(accVal){
-  // Fallback when Worker is unreachable
+  // DISABLED - PIN must always be verified
+  showPinError('Connection error. Please try again.');
+  return;
   STATE.investorRef = accVal;
   $('alert-ov').classList.remove('on');
   $('dash-ov').classList.add('on');
