@@ -2794,11 +2794,16 @@ function attemptPinLogin(){
   if(pinMode === 'returning'){
     // Existing investor — just login
     api('/login', { acc_number: accVal, pin: pin }).then(function(res){
-      if(!res.ok){ showPinError(res.error || (ar?'رمز PIN غير صحيح':'Incorrect PIN')); recordFailedAttempt(accVal); resetBtn(); return; }
+      if(!res.ok){
+        showPinError(res.error || (ar?'رمز PIN غير صحيح':'Incorrect PIN'));
+        recordFailedAttempt(accVal);
+        resetBtn();
+        return;
+      }
       localStorage.setItem('kpc_pin_'+accVal, '1');
       onLoginSuccess(res, accVal);
     }).catch(function(e){
-      showPinError(ar ? 'خطأ في الاتصال. حاول مجدداً.' : 'Connection error. Please try again.');
+      showPinError('ERR: ' + e.message);
       resetBtn();
     });
 
